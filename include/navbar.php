@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Home</a>
+            <a class="navbar-brand" href="index.php">Home</a>
         </div>
 
 
@@ -24,7 +24,7 @@
                 while($row = mysqli_fetch_assoc($select_all_catergories_query)) {
 
                     $cat_title = $row['cat_title'];
-                    echo "<li><a href='#'</a>{$cat_title}</li>";
+                    echo "<li><a href='#'</a>{$cat_title}</li></a>";
 
                 }
 
