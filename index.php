@@ -1,55 +1,65 @@
-<?php include "include/db.php"?>
+<?php include "include/db.php" ?>
 <?php include "include/header.php"; ?>
 
-    <!-- Navigation -->
-    <?php include "include/navbar.php"; ?>
+<!-- Navigation -->
+<?php include "include/navbar.php"; ?>
 
-    <!-- Page Content -->
-    <div class="container">
+<!-- Page Content -->
+<div class="container">
 
-        <div class="row">
+    <div class="row">
 
-            <!-- Blog Entries Column -->
-            <div class="col-md-8">
-
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
                 <h1 class="page-header">
                     Page Heading
                     <small>Secondary Text</small>
                 </h1>
 
-                <!-- First Blog Post -->
+            <?php
+
+            $query = "SELECT * FROM posts";
+            $select_all_posts_query = mysqli_query($connection, $query);
+
+            while ($row = mysqli_fetch_assoc($select_all_posts_query)) {
+                $post_title = $row['post_title'];
+                $post_author = $row['post_author'];
+                $post_date = $row['post_date'];
+                $post_image = $row['post_image'];
+                $post_content = $row['post_content'];
+            ?>
+
+                <!-- Blog Post -->
                 <h2>
-                    <a href="#">Blog Post Title</a>
+                    <a href="#"><?php echo $post_title ?></a>
                 </h2>
                 <p class="lead">
-                    by <a href="index.php">Start Bootstrap</a>
+                    by <a href="index.php"><?php echo $post_author ?></a>
                 </p>
-                <p><span class="glyphicon glyphicon-time"></span> Posted on August 28, 2013 at 10:00 PM</p>
+                <p><span class="glyphicon glyphicon-time"></span><?php echo " Posted on {$post_date}" ?></p>
                 <hr>
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                <img class="img-responsive" src="images/<?php echo $post_image; ?>" alt="">
                 <hr>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora, necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi corrupti debitis ipsum officiis rerum.</p>
+                <p><?php echo $post_content ?></p>
                 <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
 
-                <!-- Pager -->
-                <ul class="pager">
-                    <li class="previous">
-                        <a href="#">&larr; Older</a>
-                    </li>
-                    <li class="next">
-                        <a href="#">Newer &rarr;</a>
-                    </li>
-                </ul>
+            <?php } ?>
 
-            </div>
-
-            <!-- Blog Sidebar Widgets Column -->
+            <!-- Pager -->
+            <ul class="pager">
+                <li class="previous">
+                    <a href="#">&larr; Older</a>
+                </li>
+                <li class="next">
+                    <a href="#">Newer &rarr;</a>
+                </li>
+            </ul>
 
 
-                <!-- Blog Categories Well -->
-                <?php include "include/sidebar.php" ?>
+        </div>
 
-
-<?php include "include/footer.php"; ?>
+        <!-- Blog Sidebar Widgets and footer -->
+        <?php include "include/sidebar.php" ?>
+        <?php include "include/footer.php"; ?>
