@@ -30,20 +30,28 @@ while ($row = mysqli_fetch_assoc($select_all_posts_admin)){
     $post_comments = $row['post_comment_count'];
     $post_date = $row['post_date'];
 
-    echo 
-        "<tr>
-            <td>$post_id</td>
-            <td>$post_author</td>
-            <td>$post_title</td>
-            <td>$post_catergory</td>
-            <td>$post_status</td>
-            <td><img width=100 src='../images/$post_image' alt='image'</td>
-            <td>$post_tags</td>
-            <td>$post_comments</td>
-            <td>$post_date</td>
-            <td><a href='posts.php?source=edit_posts&p_id={$post_id}'>Edit</a></td>
-            <td><a href='posts.php?delete={$post_id}'>Delete</a></td>
-        </tr>"
+    echo "<tr>";
+    echo "<td>$post_id</td>";
+    echo "<td>$post_author</td>";
+    echo "<td>$post_title</td>";
+
+        $query = "SELECT * FROM catergories WHERE cat_id = $post_catergory";
+        $select_catergories_id = mysqli_query($connection, $query);
+
+        while($row = mysqli_fetch_assoc($select_catergories_id)){
+            $cat_id = $row['cat_id'];
+            $cat_title = $row['cat_title'];
+            echo "<td>{$cat_title}</td>";
+        }
+
+    echo "<td>$post_status</td>";
+    echo "<td><img width=100 src='../images/$post_image' alt='image'</td>";
+    echo "<td>$post_tags</td>";
+    echo "<td>$post_comments</td>";
+    echo "<td>$post_date</td>";
+    echo "<td><a href='posts.php?source=edit_posts&p_id={$post_id}'>Edit</a></td>";
+    echo "<td><a href='posts.php?delete={$post_id}'>Delete</a></td>";
+    echo "</tr>";
 ;}
 
 

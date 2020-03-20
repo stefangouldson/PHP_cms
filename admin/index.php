@@ -16,6 +16,9 @@
                         Welcome to Admin
                         <small>Subheading</small>
                     </h1>
+                    <div class="jumbotron">
+                        <h3 class="align-middle">Here admin can make changes to the blogsite by reviewing posts, updating catergories and viewing other users.</h3>
+                    </div>
                 </div>
             </div>
             <!-- /.row -->

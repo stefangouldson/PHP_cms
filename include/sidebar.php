@@ -23,7 +23,7 @@
 
     <div class="well">
         <?php
-            $query = "SELECT * from catergories LIMIT 4";
+            $query = "SELECT * from catergories LIMIT 5";
             $select_all_catergories_sidebar = mysqli_query($connection, $query);
         ?>
 
@@ -34,10 +34,9 @@
                 <?php
 
                 while($row = mysqli_fetch_assoc($select_all_catergories_sidebar)) {
-
+                    $cat_id = $row['cat_id'];
                     $cat_title = $row['cat_title'];
-                    echo "<li><a href='#'</a>{$cat_title}</li></a>";
-
+                    echo "<li><a href='catergories.php?catergory={$cat_id}'</a>{$cat_title}</li></a>";
                 }
 
                 ?>

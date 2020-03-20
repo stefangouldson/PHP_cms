@@ -32,10 +32,26 @@
     <input type="text" class="form-control" name="title">
 </div>
 
-<div class="form-group">
-    <label for="catergory">Post Catergory ID</label>
-    <input type="text" class="form-control" name="catergory">
-</div>
+ <div class="form-group">
+        <label for="catergory">Change Catergory</label>
+        <select name="catergory" id="post_catergory" class="form-control">
+                <?php 
+    
+                $query = "SELECT * from catergories";
+                $select_all_cat = mysqli_query($connection, $query);
+
+                confirmQuery($select_all_cat);
+        
+                while ($row = mysqli_fetch_assoc($select_all_cat)) {
+                    $cat_title = $row['cat_title'];
+                    $cat_id = $row['cat_id'];
+                
+                    echo "<option value='{$cat_id}'>{$cat_title}</option>";
+                }
+                ?>
+
+        </select>
+    </div>
 
 <div class="form-group">
     <label for="author">Post Author</label>

@@ -64,7 +64,7 @@ while ($row = mysqli_fetch_assoc($select_post_by_id)){
     </div>
 
     <div class="form-group">
-        <label for="catergory">Change Catergory</label>
+        <label for="catergory">Change Catergory - <bold>Set default, must change to original catergory</bold></label>
         <select name="catergory" id="post_catergory" class="form-control">
                 <?php 
     
