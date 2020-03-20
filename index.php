@@ -16,7 +16,7 @@
                     <small>to the PHP Blog</small>
                 </h1>
 
-            <?php
+        <?php
 
             $query = "SELECT * FROM posts";
             $select_all_posts_query = mysqli_query($connection, $query);
@@ -27,7 +27,7 @@
                 $post_date = $row['post_date'];
                 $post_image = $row['post_image'];
                 $post_content = $row['post_content'];
-            ?>
+        ?>
 
                 <!-- Blog Post -->
                 <h2>

@@ -1,8 +1,4 @@
 <?php include "includes/admin_header.php" ?>
-<?php
-$query = "SELECT * from catergories";
-$select_all_catergories_admin = mysqli_query($connection, $query);
-?>
 
 <div id="wrapper">
 
@@ -22,7 +18,10 @@ $select_all_catergories_admin = mysqli_query($connection, $query);
                     </h1>
 
                     <div class="col-xs-6">
-                        <form action="" method="">
+
+                        <?php insertCatergory(); ?>
+
+                        <form action="catergories.php" method="POST">
 
                             <div class="form-group">
                                 <label for="cat_title">Add Catergory</label>
@@ -33,6 +32,14 @@ $select_all_catergories_admin = mysqli_query($connection, $query);
                             </div>
 
                         </form>
+
+                        <?php
+
+                        if (isset($_GET['edit'])) {
+                            $cat_id = $_GET['edit'];
+                            include "includes/update_catergories.php";
+                        }
+                        ?>
                     </div>
 
                     <div class="col-xs-6">
@@ -44,13 +51,8 @@ $select_all_catergories_admin = mysqli_query($connection, $query);
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                while ($row = mysqli_fetch_assoc($select_all_catergories_admin)) {
-                                    $cat_title = $row['cat_title'];
-                                    $cat_id = $row['cat_id'];
-                                    echo "<tr><td>{$cat_id}</td><td>{$cat_title}</td><tr>";
-                                }
-                                ?>
+                                <?php findAllCatergories(); ?>
+                                <?php deleteCatergory() ?>
                             </tbody>
                         </table>
                     </div>
@@ -66,4 +68,4 @@ $select_all_catergories_admin = mysqli_query($connection, $query);
 
 </div>
 <!-- /#wrapper -->
-<?php include "includes/admin_footer.php" ?>
+<?php include "includes/admin_footer.php"; ?>
