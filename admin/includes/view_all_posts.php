@@ -1,18 +1,18 @@
 <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Author</th>
-                                <th>Title</th>
-                                <th>Catergory</th>
-                                <th>Status</th>
-                                <th>Image</th>
-                                <th>Tags</th>
-                                <th>Comments</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Author</th>
+            <th>Title</th>
+            <th>Catergory</th>
+            <th>Status</th>
+            <th>Image</th>
+            <th>Tags</th>
+            <th>Comments</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
 
 <?php
 
@@ -57,8 +57,8 @@ while ($row = mysqli_fetch_assoc($select_all_posts_admin)){
 
 ?>
 
-                        </tbody>
-                    </table>
+    </tbody>
+</table>
 
 <?php 
 
