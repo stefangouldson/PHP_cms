@@ -1,6 +1,18 @@
 <?php ob_start()  ?>
 <?php include "../include/db.php" ?>
 <?php include "functions.php" ?>
+<?php session_start() ?>
+
+
+<?php 
+
+if(!isset($_SESSION['user_role'])){
+    header("Location: ../");
+} else {
+
+if($_SESSION['user_role'] !== 'admin'){ header("Location: ../");}
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +25,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <title>Admin</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -30,6 +42,8 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 </head>
 

@@ -21,7 +21,7 @@
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                    <a href="../include/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                 </li>
             </ul>
         </li>
@@ -46,10 +46,10 @@
                 </ul>
             </li>
             <li>
-                <a href="catergories.php"><i class="fa fa-fw fa-wrench"></i> Catergories</a>
+                <a href="catergories.php"><i class="fa fa-list"></i> Categories</a>
             </li>
             <li>
-                <a href="comments.php"><i class="fa fa-fw fa-file"></i> Comments</a>
+                <a href="comments.php"><i class="fa fa-comments"></i> Comments</a>
             </li>
             <li>
                 <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Users <i class="fa fa-fw fa-caret-down"></i></a>
@@ -63,7 +63,7 @@
                 </ul>
             </li>
             <li>
-                <a href="index-rtl.html"><i class="fa fa-fw fa-user"></i> Profile</a>
+                <a href="profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
             </li>
         </ul>
     </div>

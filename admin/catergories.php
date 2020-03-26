@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Catergories
+                        Categories
                         <small>Add</small>
                     </h1>
 
@@ -24,7 +24,7 @@
                         <form action="catergories.php" method="POST">
 
                             <div class="form-group">
-                                <label for="cat_title">Add Catergory</label>
+                                <label for="cat_title">Add Category</label>
                                 <input type="text" class="form-control" name="cat_title">
                             </div>
                             <div class="form-group">
@@ -47,7 +47,7 @@
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Catergory Title</th>
+                                    <th>Category Title</th>
                                 </tr>
                             </thead>
                             <tbody>
