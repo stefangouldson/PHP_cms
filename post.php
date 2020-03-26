@@ -11,10 +11,6 @@
 
         <!-- Blog Entries Column -->
         <div class="col-md-8">
-            <h1 class="page-header">
-                Welcome
-                <small>to the PHP Blog</small>
-            </h1>
 
             <?php
 
@@ -35,9 +31,11 @@
             ?>
 
                 <!-- Blog Post -->
-                <h2>
-                    <a href="#"><?php echo $post_title ?></a>
-                </h2>
+                <h1 class="page-header">
+                    Title:
+                    <small><?php echo $post_title; ?></small>
+                </h1>
+                
                 <p class="lead">
                     by <a href="index.php"><?php echo $post_author ?></a>
                 </p>

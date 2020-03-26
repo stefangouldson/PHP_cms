@@ -19,6 +19,11 @@
         $add_user_query = mysqli_query($connection, $query);
 
         confirmQuery($add_user_query);
+
+        echo "<script type='text/javascript'>
+        if(window.confirm('User Updated, click ok to view all users')) {
+        window.location.href='users.php';};
+        </script>";
 }
 ?>
 

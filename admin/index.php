@@ -28,14 +28,14 @@
                                             <i class="fa fa-file-text fa-5x"></i>
                                         </div>
                                         <div class="col-xs-9 text-right">
-    <?php
-        $query = "SELECT * FROM posts";
-        $select_all_posts = mysqli_query($connection, $query);
-        $post_counts = mysqli_num_rows($select_all_posts);
-        echo "<div class='huge'>{$post_counts}</div>";
-    ?>
-                                            
-                                            <div>Posts</div>
+                                            <?php
+                                            $query = "SELECT * FROM posts WHERE post_status = 'published'";
+                                            $select_all_active_posts = mysqli_query($connection, $query);
+                                            $active_post_counts = mysqli_num_rows($select_all_active_posts);
+                                            echo "<div class='huge'>{$active_post_counts}</div>";
+                                            ?>
+
+                                            <div>Active Posts</div>
                                         </div>
                                     </div>
                                 </div>
@@ -57,13 +57,13 @@
                                             <i class="fa fa-comments fa-5x"></i>
                                         </div>
                                         <div class="col-xs-9 text-right">
-    <?php
-        $query = "SELECT * FROM comments";
-        $select_all_comments = mysqli_query($connection, $query);
-        $comment_counts = mysqli_num_rows($select_all_comments);
-        echo "<div class='huge'>{$comment_counts}</div>";
-    ?>
-                                            <div>Comments</div>
+                                            <?php
+                                            $query = "SELECT * FROM comments WHERE comment_status = 'APPROVED'";
+                                            $select_all_app_comments = mysqli_query($connection, $query);
+                                            $app_comment_counts = mysqli_num_rows($select_all_app_comments);
+                                            echo "<div class='huge'>{$app_comment_counts}</div>";
+                                            ?>
+                                            <div>Approved Comments</div>
                                         </div>
                                     </div>
                                 </div>
@@ -85,13 +85,13 @@
                                             <i class="fa fa-users fa-5x"></i>
                                         </div>
                                         <div class="col-xs-9 text-right">
-    <?php
-        $query = "SELECT * FROM users";
-        $select_all_users = mysqli_query($connection, $query);
-        $user_counts = mysqli_num_rows($select_all_users);
-        echo "<div class='huge'>{$user_counts}</div>";
-    ?>
-                                            <div> Users</div>
+                                            <?php
+                                            $query = "SELECT * FROM users WHERE user_role = 'subscriber'";
+                                            $select_all_users = mysqli_query($connection, $query);
+                                            $user_counts = mysqli_num_rows($select_all_users);
+                                            echo "<div class='huge'>{$user_counts}</div>";
+                                            ?>
+                                            <div> Subscribers</div>
                                         </div>
                                     </div>
                                 </div>
@@ -113,12 +113,12 @@
                                             <i class="fa fa-list fa-5x"></i>
                                         </div>
                                         <div class="col-xs-9 text-right">
-    <?php
-        $query = "SELECT * FROM catergories";
-        $select_all_catergories = mysqli_query($connection, $query);
-        $cat_counts = mysqli_num_rows($select_all_catergories);
-        echo "<div class='huge'>{$cat_counts}</div>";
-    ?>
+                                            <?php
+                                            $query = "SELECT * FROM catergories";
+                                            $select_all_catergories = mysqli_query($connection, $query);
+                                            $cat_counts = mysqli_num_rows($select_all_catergories);
+                                            echo "<div class='huge'>{$cat_counts}</div>";
+                                            ?>
                                             <div>Categories</div>
                                         </div>
                                     </div>
@@ -135,54 +135,74 @@
                     </div>
                     <!-- /.row -->
 
-    <?php 
-    
-    $query = "SELECT * FROM posts WHERE post_status = 'draft'";
-    $select_all_draft_posts = mysqli_query($connection, $query);
-    $draft_count = mysqli_num_rows($select_all_draft_posts);
-                    
-                    
-     ?>
+                    <?php
+
+                    $query = "SELECT * FROM posts";
+                    $select_all_posts = mysqli_query($connection, $query);
+                    $post_counts = mysqli_num_rows($select_all_posts);
+
+                    $query = "SELECT * FROM posts WHERE post_status = 'draft'";
+                    $select_all_draft_posts = mysqli_query($connection, $query);
+                    $draft_count = mysqli_num_rows($select_all_draft_posts);
+
+
+                    $query = "SELECT * FROM comments";
+                    $select_all_comments = mysqli_query($connection, $query);
+                    $comment_counts = mysqli_num_rows($select_all_comments);
+
+                    $query = "SELECT * FROM comments WHERE comment_status = 'UNAPPROVED'";
+                    $select_all_unapp_comments = mysqli_query($connection, $query);
+                    $unapp_comment_counts = mysqli_num_rows($select_all_unapp_comments);
+
+
+                    $query = "SELECT * FROM users";
+                    $select_all_users = mysqli_query($connection, $query);
+                    $user_counts = mysqli_num_rows($select_all_users);
+
+                    $query = "SELECT * FROM users WHERE user_role = 'admin'";
+                    $select_all_admin = mysqli_query($connection, $query);
+                    $admin_counts = mysqli_num_rows($select_all_admin);
+                    ?>
 
                     <div class="row">
+                            <script type="text/javascript">
+                                google.charts.load('current', {
+                                    'packages': ['bar']
+                                });
+                                google.charts.setOnLoadCallback(drawChart);
 
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart);
+                                function drawChart() {
+                                    var data = google.visualization.arrayToDataTable([
+                                        ['Type', 'Total'],
 
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Data', 'Count'],
+                                        <?php
+                                        $element_text = ['Posts', 'Comments', 'Users', 'Categories'];
+                                        $element_count = [$post_counts, $comment_counts, $user_counts, $cat_counts];
 
-          <?php
-            $element_text = ['Active Posts', 'Comments', 'Users', 'Categories'];
-            $element_count = [$post_counts, $comment_counts, $user_counts, $cat_counts];
+                                        for ($i = 0; $i < 4; $i++) {
 
-          for($i = 0; $i < 4; $i++) {
+                                            echo "['{$element_text[$i]}'" . "," . "{$element_count[$i]}],";
+                                        }
 
-            echo "['{$element_text[$i]}'" . "," . "{$element_count[$i]}],";
+                                        ?>
 
-          }
-          
-          ?>
+                                    ]);
 
-        ]);
+                                    var options = {
+                                        chart: {
+                                            title: '',
+                                            subtitle: '',
+                                        }
+                                    };
 
-        var options = {
-          chart: {
-            title: '',
-            subtitle: '',
-          }
-        };
+                                    var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
 
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
-    </script>
-
-<div id="columnchart_material" style="width: 'auto'; height: 500px;">
-</div>
+                                    chart.draw(data, google.charts.Bar.convertOptions(options));
+                                }
+                            </script>
+                        <div class="col-md-auto">
+                            <div id="columnchart_material" style="width: 'auto'; height: 500px;"></div>
+                        </div>
                     </div>
                 </div>
             </div>

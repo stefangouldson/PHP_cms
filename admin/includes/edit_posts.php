@@ -53,6 +53,10 @@ while ($row = mysqli_fetch_assoc($select_post_by_id)){
         $update_post_query = mysqli_query($connection, $query);
 
         confirmQuery($update_post_query);
+        echo "<script type='text/javascript'>
+            if(window.confirm('Post Updated, click ok to view all post')) {
+            window.location.href='posts.php';};
+            </script>";
     }
 ?>
 

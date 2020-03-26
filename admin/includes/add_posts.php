@@ -23,6 +23,10 @@
         $create_post_query = mysqli_query($connection, $query);
 
         confirmQuery($create_post_query);
+        echo "<script type='text/javascript'>
+        if(window.confirm('Post Added, click ok to view all post')) {
+        window.location.href='posts.php';};
+        </script>";
 }
 ?>
 <form action="" method="POST" enctype="multipart/form-data">

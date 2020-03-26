@@ -45,6 +45,10 @@ while ($row = mysqli_fetch_assoc($select_user_by_id)){
         $update_user_query = mysqli_query($connection, $query);
 
         confirmQuery($update_user_query);
+        echo "<script type='text/javascript'>
+        if(window.confirm('User Updated, click ok to view all users')) {
+        window.location.href='users.php';};
+        </script>";
     }
 ?>
 
