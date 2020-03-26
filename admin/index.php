@@ -88,8 +88,8 @@
                                             <?php
                                             $query = "SELECT * FROM users WHERE user_role = 'subscriber'";
                                             $select_all_users = mysqli_query($connection, $query);
-                                            $user_counts = mysqli_num_rows($select_all_users);
-                                            echo "<div class='huge'>{$user_counts}</div>";
+                                            $sub_counts = mysqli_num_rows($select_all_users);
+                                            echo "<div class='huge'>{$sub_counts}</div>";
                                             ?>
                                             <div> Subscribers</div>
                                         </div>
@@ -173,25 +173,20 @@
 
                                 function drawChart() {
                                     var data = google.visualization.arrayToDataTable([
-                                        ['Type', 'Total'],
+                                        [' ', 'Total', 'Active', 'Inactive'],
 
                                         <?php
-                                        $element_text = ['Posts', 'Comments', 'Users', 'Categories'];
-                                        $element_count = [$post_counts, $comment_counts, $user_counts, $cat_counts];
-
-                                        for ($i = 0; $i < 4; $i++) {
-
-                                            echo "['{$element_text[$i]}'" . "," . "{$element_count[$i]}],";
-                                        }
-
+                                        echo "['Posts', {$post_counts}, {$active_post_counts}, {$draft_count}],";
+                                        echo "['Comments', {$comment_counts}, {$app_comment_counts}, {$unapp_comment_counts}],";
+                                        echo "['Users', {$user_counts}, {$admin_counts}, {$sub_counts}]";
                                         ?>
 
                                     ]);
 
                                     var options = {
                                         chart: {
-                                            title: '',
-                                            subtitle: '',
+                                            title: 'Summary',
+                                            subtitle: 'ACTIVE = Published Posts, Approved Comments, Admin Users | INACTIVE = Draft Posts, Unapproved Comments, Subscribers',
                                         }
                                     };
 
