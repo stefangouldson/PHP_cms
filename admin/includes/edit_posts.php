@@ -68,16 +68,24 @@ while ($row = mysqli_fetch_assoc($select_post_by_id)){
     </div>
 
     <div class="form-group">
-        <label for="catergory">Change Catergory - <bold>Set default, must change to original catergory</bold></label>
+        <label for="catergory">Change Catergory</label>
         <select name="catergory" id="post_catergory" class="form-control">
-                <?php 
-    
-                $query = "SELECT * from catergories";
+            <?php 
+                $query = "SELECT * FROM catergories WHERE cat_id = {$post_catergory}";
                 $select_all_cat = mysqli_query($connection, $query);
 
-                // confirmQuery($select_all_cat);
-        
                 while ($row = mysqli_fetch_assoc($select_all_cat)) {
+                    $cat_title = $row['cat_title'];
+                    $cat_id = $row['cat_id'];
+                    echo "<option value='{$cat_id}'>{$cat_title}</option>";
+                }
+            ?>
+                <?php 
+    
+                $query = "SELECT * FROM catergories WHERE cat_id != {$post_catergory}";
+                $select_other_cat = mysqli_query($connection, $query);
+        
+                while ($row = mysqli_fetch_assoc($select_other_cat)) {
                     $cat_title = $row['cat_title'];
                     $cat_id = $row['cat_id'];
                 
@@ -95,8 +103,18 @@ while ($row = mysqli_fetch_assoc($select_post_by_id)){
 
     <div class="form-group">
         <label for="status">Update Status</label>
-        <input value="<?php echo $post_status ?>" type="text" class="form-control" name="status">
+        <select name="status" id="post_status" class="form-control">
+            <option value="<?php echo $post_status; ?>"><?php echo $post_status ?></option>
+            <?php  
+            if($post_status == 'draft'){
+                echo "<option value='published'>published</option>";
+            } else {
+                echo "<option value='draft'>draft</option>";
+            }
+            ?>
+        </select>
     </div>
+
 
     <div class="form-group">
         <label for="image">Change Photo</label>
@@ -111,7 +129,7 @@ while ($row = mysqli_fetch_assoc($select_post_by_id)){
 
     <div class="form-group">
         <label for="content">Update Content</label>
-        <textarea class="form-control" name="content" cols=30 rows="10"><?php echo $post_content ?></textarea>
+        <textarea id="body" class="form-control" name="content" cols=30 rows="10"><?php echo $post_content ?></textarea>
     </div>
 
     <div class="form-group">

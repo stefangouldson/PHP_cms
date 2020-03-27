@@ -63,7 +63,7 @@
 <div class="form-group">
     <label for="content">Role</label>
     <select name="user_role" class="form-control" id="">
-        <option value="subscriber">Select Option</option>
+        <option disabled selected hidden>Select Option</option>
         <option value="admin">Admin</option>
         <option value="subscriber">Subscriber</option>
     </select>

@@ -1,10 +1,11 @@
+
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
             <th>ID</th>
             <th>Author</th>
             <th>Title</th>
-            <th>Catergory</th>
+            <th>Category</th>
             <th>Status</th>
             <th>Image</th>
             <th>Tags</th>

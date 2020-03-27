@@ -17,7 +17,7 @@
             <ul class="nav navbar-nav">
 
                 <?php
-
+                /*
                 $query = "SELECT * from catergories";
                 $select_all_catergories_query = mysqli_query($connection, $query);
 
@@ -25,11 +25,23 @@
 
                     $cat_title = $row['cat_title'];
                     echo "<li><a href='#'</a>{$cat_title}</li></a>";
-
+                
                 }
-
+                */
                 ?>
                 <li><a href="admin">Admin</a></li>
+
+                <?php 
+                
+                if(isset($_SESSION['user_role'])){
+                    if(isset($_GET['p_id'])){
+                        
+                        echo "<li><a href='admin/posts.php?source=edit_posts&p_id={$_GET['p_id']}'>Update Post</a></li>";
+
+                    }
+                }
+                
+                ?>
 
             </ul>
         </div>

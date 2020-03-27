@@ -37,8 +37,9 @@
 </div>
 
  <div class="form-group">
-        <label for="catergory">Change Catergory</label>
+        <label for="catergory">Change Category</label>
         <select name="catergory" id="post_catergory" class="form-control">
+        <option disabled selected hidden>Select Category</option>
                 <?php 
     
                 $query = "SELECT * from catergories";
@@ -64,7 +65,11 @@
 
 <div class="form-group">
     <label for="status">Post Status</label>
-    <input type="text" class="form-control" name="status">
+    <select name="status" id="post_status" class="form-control">
+        <option disabled selected hidden>Select Status</option>
+        <option value="draft">draft</option>
+        <option value="published">published</option>
+    </select >
 </div>
 
 <div class="form-group">
@@ -79,7 +84,7 @@
 
 <div class="form-group">
     <label for="content">Post Content</label>
-    <textarea class="form-control" name="content" cols=30 rows="10"></textarea>
+    <textarea id="body" class="form-control" name="content" cols=30 rows="10"></textarea>
 </div>
 
 <div class="form-group">

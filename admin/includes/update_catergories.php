@@ -1,7 +1,7 @@
 <form action="" method="POST">
 
 <div class="form-group">
-    <label for="cat_title">Edit Catergory</label>
+    <label for="cat_title">Edit Category</label>
 
     <?php
 
@@ -42,7 +42,7 @@
 </div>
 
 <div class="form-group">
-    <input class="btn btn-primary" type="submit" name="update" value="Edit Catergory">
+    <input class="btn btn-primary" type="submit" name="update" value="Edit Category">
 </div>
 
 </form>

@@ -17,6 +17,11 @@
         <!-- /.input-group -->
     </div>
 
+    <!-- <?php 
+    /*
+    $user_role = $_SESSION['user_role'];
+    if(!$user_role){ 
+        */?> -->
     <div class="well">
         <h4>Login</h4>
         <form action="include/login.php" method="POST">
@@ -34,6 +39,8 @@
         </form>
         <!-- /.input-group -->
     </div>
+
+    <!-- <?php // } ?> -->
 
 
 

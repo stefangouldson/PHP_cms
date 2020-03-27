@@ -133,8 +133,14 @@
                             </div>
                         </div>
                     </div>
+                    
                     <!-- /.row -->
 
+                    <div class="row">
+                        <div class="col-md-auto">
+                            <div id="columnchart_material" style="width: 'auto'; height: 500px;"></div>
+                        </div>
+                    </div>
                     <?php
 
                     $query = "SELECT * FROM posts";
@@ -195,9 +201,6 @@
                                     chart.draw(data, google.charts.Bar.convertOptions(options));
                                 }
                             </script>
-                        <div class="col-md-auto">
-                            <div id="columnchart_material" style="width: 'auto'; height: 500px;"></div>
-                        </div>
                     </div>
                 </div>
             </div>
