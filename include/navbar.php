@@ -16,20 +16,8 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
 
-                <?php
-                /*
-                $query = "SELECT * from catergories";
-                $select_all_catergories_query = mysqli_query($connection, $query);
-
-                while($row = mysqli_fetch_assoc($select_all_catergories_query)) {
-
-                    $cat_title = $row['cat_title'];
-                    echo "<li><a href='#'</a>{$cat_title}</li></a>";
-                
-                }
-                */
-                ?>
                 <li><a href="admin">Admin</a></li>
+                <li><a href="registration.php">Register</a></li>
 
                 <?php 
                 

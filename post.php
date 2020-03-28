@@ -32,12 +32,12 @@
 
                 <!-- Blog Post -->
                 <h1 class="page-header">
-                    Title:
-                    <small><?php echo $post_title; ?></small>
+                <?php echo $post_title; ?>
+                    <small>By <?php echo $post_author ?></small>
                 </h1>
                 
                 <p class="lead">
-                    by <a href="index.php"><?php echo $post_author ?></a>
+                    <a href="index.php">View Profile</a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span><?php echo " Posted on {$post_date}" ?></p>
                 <hr>
