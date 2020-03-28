@@ -8,8 +8,6 @@
             <th>Status</th>
             <th>Post</th>
             <th>Date</th>
-            <th>Approve</th>
-            <th>Unapprove</th>
         </tr>
     </thead>
     <tbody>
@@ -43,9 +41,13 @@ while ($row = mysqli_fetch_assoc($select_all_comments_admin)){
         echo "<td><a href = '../post.php?p_id={$post_id}'>{$post_title}</a></td>";
     }
     echo "<td>$comment_date</td>";
-    echo "<td><a href='comments.php?approve={$comment_id}'>Approve</a></td>";
-    echo "<td><a href='comments.php?unapprove={$comment_id}'>Unapprove</a></td>";
-    echo "<td><a href='comments.php?delete={$comment_id}'>Delete</a></td>";
+
+    if ($comment_status == 'UNAPPROVED'){
+    echo "<td><a class='btn btn-warning' href='comments.php?approve={$comment_id}'>Approve</a></td>";
+    } else {
+    echo "<td><a class='btn btn-warning' href='comments.php?unapprove={$comment_id}'>Unapprove</a></td>";
+    }
+    echo "<td><a class='btn btn-danger' href='comments.php?delete={$comment_id}'>Delete</a></td>";
 
     echo "</tr>";
 ;}

@@ -42,7 +42,7 @@
 </div>
 
 <div class="form-group">
-    <input class="btn btn-primary" type="submit" name="update" value="Edit Category">
+    <input class="btn btn-success" type="submit" name="update" value="Edit Category">
 </div>
 
 </form>

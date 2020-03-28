@@ -47,8 +47,8 @@ function findAllCatergories () {
         echo "<tr>
         <td>{$cat_id}</td>
         <td>{$cat_title}</td>
-        <td><a href='catergories.php?edit={$cat_id}'>Edit</a></td>
-        <td><a href='catergories.php?delete={$cat_id}'>Delete</a></td>
+        <td><a class='btn btn-success' href='catergories.php?edit={$cat_id}'>Edit</a></td>
+        <td><a class='btn btn-danger' href='catergories.php?delete={$cat_id}'>Delete</a></td>
         </tr>";
     }
 
