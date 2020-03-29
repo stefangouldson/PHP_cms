@@ -53,7 +53,8 @@ if(isset($_POST['checkBoxArray'])){
         $query = "UPDATE posts SET post_views_count = 0 WHERE post_id = {$checkBoxValue}";
         $reset_query = mysqli_query($connection, $query);
         confirmQuery($reset_query);
-
+        break;
+        
       }
     }
 
