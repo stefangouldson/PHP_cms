@@ -115,7 +115,6 @@ while ($row = mysqli_fetch_assoc($select_all_posts_admin)){
     $post_status = $row['post_status'];
     $post_image = $row['post_image'];
     $post_tags = $row['post_tags'];
-    $post_comments = $row['post_comment_count'];
     $post_date = $row['post_date'];
     $post_views = $row['post_views_count'];
 
@@ -141,14 +140,26 @@ while ($row = mysqli_fetch_assoc($select_all_posts_admin)){
     echo "<td>$post_status</td>";
     echo "<td><img width=100 src='../images/$post_image' alt='image'</td>";
     echo "<td>$post_tags</td>";
-    echo "<td>$post_comments</td>";
+
+    $comment_query = "SELECT * FROM comments WHERE comment_post_id = {$post_id}";
+    $fetch_comment = mysqli_query($connection, $comment_query);
+    $row = mysqli_fetch_array($fetch_comment);
+    $post_comments = mysqli_num_rows($fetch_comment);
+
+    if($post_comments>0){
+        $comment_post_id = $row['comment_post_id'];
+        echo "<td><a href='comment.php?id={$comment_post_id}'>$post_comments</a></td>";
+    } else {
+        echo "<td>$post_comments</td>";
+    }
+
     echo "<td>$post_date</td>";
     echo "<td>$post_views</td>";
     echo "<td><a class='btn btn-info' href='../post.php?p_id={$post_id}'>View Post</a></td>";
     echo "<td><a class='btn btn-success' href='posts.php?source=edit_posts&p_id={$post_id}'>Edit</a></td>";
     echo "<td><a class='btn btn-danger' onClick=\"javascript: return confirm('Are you sure you want to delete this post?') \"  href='posts.php?delete={$post_id}'>Delete</a></td>";
     echo "</tr>";
-;}
+}
 
 
 ?>

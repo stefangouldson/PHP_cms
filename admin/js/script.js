@@ -12,6 +12,18 @@ $(document).ready(function(){
 
 })
 
+function loadUsersOnline() {
+
+    $.get("functions.php?onlineusers=result", function(data){
+        $(".usersonline").text(data);
+    })
+}
+
+    setInterval(function(){
+        loadUsersOnline()
+    },500)
+
+
 $(document).ready(function(){
     
 $('#selectAllBoxes').click(function(event){
@@ -29,5 +41,6 @@ $('#selectAllBoxes').click(function(event){
     })
 
 })
+
 
 

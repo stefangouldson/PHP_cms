@@ -80,12 +80,10 @@
                         die("Comment Query Fail" . mysqli_error($connection));
                     }
 
-                    $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = $the_post_id";
-                    $commentCountQuery = mysqli_query($connection, $query);
+                    // $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = $the_post_id";
+                    // $commentCountQuery = mysqli_query($connection, $query);
 
-                    if (!$commentCountQuery) {
-                        die("Comment Count Query" . mysqli_error($connection));
-                    }
+
                 } else {
                     echo "<script>alert('Comment fields cannot be empty')</script>";
                 }
