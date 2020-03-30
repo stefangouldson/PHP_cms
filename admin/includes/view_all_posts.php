@@ -31,6 +31,7 @@ if(isset($_POST['checkBoxArray'])){
             
             while ($row = mysqli_fetch_assoc($select_all_posts_admin)){
                 $post_author = $row['post_author'];
+                $post_user_id = $row['post_user_id'];
                 $post_title = $row['post_title'];
                 $post_catergory = $row['post_catergory_id'];
                 $post_status = $row['post_status'];
@@ -41,8 +42,8 @@ if(isset($_POST['checkBoxArray'])){
                 $post_content = $row['post_content'];
             }
 
-            $query = "INSERT INTO posts (post_catergory_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_status)
-            VALUES({$post_catergory},'{$post_title}','{$post_author}', now(), '{$post_image}', '{$post_content}','{$post_tags}','{$post_status}' )"; 
+            $query = "INSERT INTO posts (post_catergory_id, post_title, post_user_id, post_date, post_image, post_content, post_tags, post_status)
+            VALUES({$post_catergory},'{$post_title}','{$post_user_id}', now(), '{$post_image}', '{$post_content}','{$post_tags}','{$post_status}' )"; 
             
             $clone_query = mysqli_query($connection, $query);
             confirmQuery($clone_query);
@@ -110,6 +111,7 @@ $select_all_posts_admin = mysqli_query($connection, $query);
 while ($row = mysqli_fetch_assoc($select_all_posts_admin)){
     $post_id = $row['post_id'];
     $post_author = $row['post_author'];
+    $post_user_id = $row['post_user_id'];
     $post_title = $row['post_title'];
     $post_catergory = $row['post_catergory_id'];
     $post_status = $row['post_status'];
@@ -117,7 +119,6 @@ while ($row = mysqli_fetch_assoc($select_all_posts_admin)){
     $post_tags = $row['post_tags'];
     $post_date = $row['post_date'];
     $post_views = $row['post_views_count'];
-
     echo "<tr>";
     ?>
 
@@ -125,7 +126,15 @@ while ($row = mysqli_fetch_assoc($select_all_posts_admin)){
     
     <?php
     echo "<td>$post_id</td>";
-    echo "<td>$post_author</td>";
+    if($post_user_id == null){
+        echo "<td>$post_author</td>";
+    } else {
+        $query = "SELECT * FROM users WHERE user_id = {$post_user_id}";
+        $get_user_query = mysqli_query($connection, $query);
+        $row = mysqli_fetch_array($get_user_query);
+        $username = $row['username'];
+        echo "<td>$username</td>";
+    }
     echo "<td>$post_title</td>";
 
         $query = "SELECT * FROM catergories WHERE cat_id = $post_catergory";

@@ -15,11 +15,11 @@
             <?php
 
             if (isset($_GET['p_id'])) {
-            $post_id = $_GET['p_id'];
+                $post_id = $_GET['p_id'];
 
                 $view_query = "UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id = {$post_id}";
                 $update_views = mysqli_query($connection, $view_query);
-                if(!$update_views){
+                if (!$update_views) {
                     die("VIEWS QUERY FAILED" . mysqli_error($connection));
                 }
 
@@ -29,6 +29,7 @@
                 while ($row = mysqli_fetch_assoc($select_all_posts_query)) {
                     $post_title = $row['post_title'];
                     $post_author = $row['post_author'];
+                    $post_user_id = $row['post_user_id'];
                     $post_date = $row['post_date'];
                     $post_image = $row['post_image'];
                     $post_content = $row['post_content'];
@@ -37,7 +38,18 @@
                     <!-- Blog Post -->
                     <h1 class="page-header">
                         <?php echo $post_title; ?>
-                        <small>By <?php echo $post_author ?></small>
+                        <small>By <?php
+
+                            $query = "SELECT * FROM users WHERE user_id = {$post_user_id}";
+                            $get_user_query = mysqli_query($connection, $query);
+                            $row = mysqli_fetch_array($get_user_query);
+                            $username = $row['username'];
+                            echo "<td>$username</td>";
+                            
+                        
+                        
+                        
+                        ?></small>
                     </h1>
 
                     <p class="lead">
@@ -69,6 +81,8 @@
                 $comment_email = $_POST['comment_email'];
                 $comment_content = $_POST['comment_content'];
 
+                $comment_content = mysqli_real_escape_string($connection, $comment_content);
+
                 if (!empty($comment_author) && !empty($comment_email) && !empty($comment_content)) {
 
 
@@ -97,16 +111,36 @@
                 <h4>Leave a Comment:</h4>
                 <form role="form" method="POST" action="">
 
-                    <div class="form-group">
-                        <input class="form-control" type="text" name="comment_author" placeholder="Enter Name">
-                    </div>
+                    <?php
+
+                    if (isset($_SESSION['username'])) {
+                        $session_username = $_SESSION['username'];
+                        $session_email = $_SESSION['user_email'];
+                    ?>
+
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="comment_author" placeholder="Enter Name" value="<?php echo $session_username ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <input class="form-control" type="email" name="comment_email" placeholder="Enter Email" value="<?php echo $session_email ?>">
+                        </div>
+
+                    <?php } else { ?>
+
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="comment_author" placeholder="Enter Name">
+                        </div>
+
+                        <div class="form-group">
+                            <input class="form-control" type="email" name="comment_email" placeholder="Enter Email">
+                        </div>
+
+
+                    <?php } ?>
 
                     <div class="form-group">
-                        <input class="form-control" type="email" name="comment_email" placeholder="Enter Email">
-                    </div>
-
-                    <div class="form-group">
-                        <textarea class="form-control" name="comment_content" rows="3"></textarea>
+                        <textarea placeholder="Write a comment" class="form-control" name="comment_content" rows="3"></textarea>
                     </div>
 
                     <button type="submit" name="create_comment" class="btn btn-primary">Submit</button>

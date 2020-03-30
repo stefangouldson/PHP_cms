@@ -3,9 +3,13 @@
 
 <!-- Navigation -->
 <?php include "include/navbar.php"; ?>
-<?php if (isset($_GET['p_id'])) {
-    $post_id = $_GET['p_id'];
+<?php if (isset($_GET['author'])) {
     $the_post_author = $_GET['author'];
+
+    $query = "SELECT * FROM users WHERE user_id = {$the_post_author}";
+    $get_user_query = mysqli_query($connection, $query);
+    $row = mysqli_fetch_array($get_user_query);
+    $username = $row['username'];
 } ?>
 
 <!-- Page Content -->
@@ -17,13 +21,13 @@
         <div class="col-md-8">
             <h1 class="page-header">
                 Posts By:
-                <small><?php echo $the_post_author ?></small>
+                <small><?php echo $username ?></small>
             </h1>
 
             <?php
 
 
-            $query = "SELECT * FROM posts WHERE post_author = '{$the_post_author}'";
+            $query = "SELECT * FROM posts WHERE post_user_id = '{$the_post_author}'";
             $select_all_posts_query = mysqli_query($connection, $query);
 
             while ($row = mysqli_fetch_array($select_all_posts_query)) {

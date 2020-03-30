@@ -17,7 +17,7 @@
 
         move_uploaded_file($post_image_temp, "../images/$post_image");
 
-        $query = "INSERT INTO posts (post_catergory_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_status)
+        $query = "INSERT INTO posts (post_catergory_id, post_title, post_user_id, post_date, post_image, post_content, post_tags, post_status)
         VALUES({$post_catergory_id},'{$post_title}','{$post_author}', now(), '{$post_image}', '{$post_content}','{$post_tags}','{$post_status}' )"; 
         
         $create_post_query = mysqli_query($connection, $query);
@@ -58,10 +58,33 @@
         </select>
     </div>
 
-<div class="form-group">
+
+    <div class="form-group">
+        <label for="author">Post Author</label>
+        <select name="author" id="post_author" class="form-control">
+        <option disabled selected hidden>Select Author</option>
+                <?php 
+    
+                $query = "SELECT * FROM users";
+                $select_all_users = mysqli_query($connection, $query);
+
+                confirmQuery($select_all_users);
+        
+                while ($row = mysqli_fetch_assoc($select_all_users)) {
+                    $username = $row['username'];
+                    $user_id = $row['user_id'];
+                
+                    echo "<option value='{$user_id}'>{$username}</option>";
+                }
+                ?>
+
+        </select>
+    </div>
+
+<!-- <div class="form-group">
     <label for="author">Post Author</label>
     <input type="text" class="form-control" name="author">
-</div>
+</div> -->
 
 <div class="form-group">
     <label for="status">Post Status</label>

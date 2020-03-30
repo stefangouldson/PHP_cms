@@ -38,12 +38,11 @@
 
             <?php
 
-            $count_query = "SELECT * FROM posts";
+            $count_query = "SELECT * FROM posts WHERE post_status = 'published'";
             $posts_count = mysqli_query($connection, $count_query);
             $count = mysqli_num_rows($posts_count);
 
             $count = ceil($count / $per_page);
-
 
 
     $query = "SELECT * FROM posts WHERE post_status = 'published' LIMIT {$page_1},{$per_page}";
@@ -53,9 +52,15 @@
                 $post_id = $row['post_id'];
                 $post_title = $row['post_title'];
                 $post_author = $row['post_author'];
+                $post_user_id = $row['post_user_id'];
                 $post_date = $row['post_date'];
                 $post_image = $row['post_image'];
                 $post_content = substr($row['post_content'], 0, 100);
+
+                $query = "SELECT * FROM users WHERE user_id = {$post_user_id}";
+                $get_user_query = mysqli_query($connection, $query);
+                $row = mysqli_fetch_array($get_user_query);
+                $username = $row['username'];
             ?>
 
                 <!-- Blog Post -->
@@ -63,7 +68,7 @@
                     <a href="post.php?p_id=<?php echo $post_id ?>"><?php echo $post_title ?></a>
                 </h2>
                 <p class="lead">
-                    by <a href="author_posts.php?author=<?php echo $post_author ?>&p_id=<?php echo $post_id ?>"><?php echo $post_author ?></a>
+                    by <a href="author_posts.php?author=<?php echo $post_user_id ?>"><?php echo $username ?></a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span><?php echo " Posted on {$post_date}" ?></p>
                 <hr>
