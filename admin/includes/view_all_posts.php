@@ -182,11 +182,16 @@ while ($row = mysqli_fetch_assoc($select_all_posts_admin)){
 if(isset($_GET['delete'])){
     global $connection;
 
-    $post_id_del = $_GET['delete'];
-    $query = "DELETE FROM posts WHERE post_id = {$post_id_del}";
-    $deleteQuery = mysqli_query($connection, $query);
-    header("location:posts.php");
+    if(isset($_SESSION['user_role'])){
+        if($_SESSION['user_role'] == 'admin'){
 
+        $post_id_del = $_GET['delete'];
+        $query = "DELETE FROM posts WHERE post_id = {$post_id_del}";
+        $deleteQuery = mysqli_query($connection, $query);
+        header("location:posts.php");
+
+        }
+    }
 }
 
 

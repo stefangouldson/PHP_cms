@@ -83,11 +83,15 @@ if(isset($_GET['unapprove'])){
 if(isset($_GET['delete'])){
     global $connection;
 
-    $comment_id_del = $_GET['delete'];
-    $query = "DELETE FROM comments WHERE comment_id = {$comment_id_del}";
-    $deleteQuery = mysqli_query($connection, $query);
-    header("location:comments.php");
-
+    if(isset($_SESSION['user_role'])){
+        if($_SESSION['user_role'] == 'admin'){
+            
+        $comment_id_del = $_GET['delete'];
+        $query = "DELETE FROM comments WHERE comment_id = {$comment_id_del}";
+        $deleteQuery = mysqli_query($connection, $query);
+        header("location:comments.php");
+        }
+    }
 }
 
 
