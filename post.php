@@ -53,7 +53,7 @@
                     </h1>
 
                     <p class="lead">
-                        <a href="index.php">View Profile</a>
+                        <a href="author_posts.php?author=<?php echo $post_user_id ?>">View Profile</a>
                     </p>
                     <p><span class="glyphicon glyphicon-time"></span><?php echo " Posted on {$post_date}" ?></p>
                     <hr>

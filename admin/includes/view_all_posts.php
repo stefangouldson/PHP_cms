@@ -89,9 +89,9 @@ if(isset($_POST['checkBoxArray'])){
         <tr>
         <!-- <input type="checkbox" id="selectAllBoxes"> -->
             <th><input id='selectAllBoxes' type="checkbox"></th>
-            <th>ID</th>
-            <th>Author</th>
+            <!-- <th>ID</th> -->
             <th>Title</th>
+            <th>Author</th>
             <th>Category</th>
             <th>Status</th>
             <th>Image</th>
@@ -125,7 +125,8 @@ while ($row = mysqli_fetch_assoc($select_all_posts_admin)){
     <td><input class = 'checkBoxes' type='checkbox' name = 'checkBoxArray[]' value='<?php echo $post_id ?>'></td>
     
     <?php
-    echo "<td>$post_id</td>";
+    echo "<td><a href='../post.php?p_id={$post_id}'>$post_title</a></td>";
+    // echo "<td>$post_id</td>";
     if($post_user_id == null){
         echo "<td>$post_author</td>";
     } else {
@@ -135,7 +136,6 @@ while ($row = mysqli_fetch_assoc($select_all_posts_admin)){
         $username = $row['username'];
         echo "<td>$username</td>";
     }
-    echo "<td>$post_title</td>";
 
         $query = "SELECT * FROM catergories WHERE cat_id = $post_catergory";
         $select_catergories_id = mysqli_query($connection, $query);
@@ -164,7 +164,6 @@ while ($row = mysqli_fetch_assoc($select_all_posts_admin)){
 
     echo "<td>$post_date</td>";
     echo "<td>$post_views</td>";
-    echo "<td><a class='btn btn-info' href='../post.php?p_id={$post_id}'>View Post</a></td>";
     echo "<td><a class='btn btn-success' href='posts.php?source=edit_posts&p_id={$post_id}'>Edit</a></td>";
     echo "<td><a class='btn btn-danger' onClick=\"javascript: return confirm('Are you sure you want to delete this post?') \"  href='posts.php?delete={$post_id}'>Delete</a></td>";
     echo "</tr>";
