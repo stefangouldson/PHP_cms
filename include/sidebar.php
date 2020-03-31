@@ -1,6 +1,5 @@
 <div class="col-md-4">
 
-
     <!-- Blog Search Well -->
     <div class="well">
         <h4>Blog Search</h4>
@@ -17,11 +16,12 @@
         <!-- /.input-group -->
     </div>
 
-    <!-- <?php 
-    /*
+    <?php 
+    
     $user_role = $_SESSION['user_role'];
+    $username = $_SESSION['username'];
     if(!$user_role){ 
-        */?> -->
+        ?>
     <div class="well">
         <h4>Login</h4>
         <form action="include/login.php" method="POST">
@@ -40,7 +40,19 @@
         <!-- /.input-group -->
     </div>
 
-    <!-- <?php // } ?> -->
+     <?php } else { ?>
+
+    <div class="well">
+        <h4>Signed in as <?php echo $username ?></h4>
+        <form action="include/logout.php" method="POST">
+            <div class="form-group">
+                <input name="logout" type="submit" value="Logout" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+
+
+     <?php } ?>
 
 
 
@@ -48,7 +60,7 @@
 
     <div class="well">
         <?php
-            $query = "SELECT * from catergories LIMIT 5";
+            $query = "SELECT * from catergories";
             $select_all_catergories_sidebar = mysqli_query($connection, $query);
         ?>
 

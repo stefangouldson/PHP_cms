@@ -9,6 +9,17 @@
 
     <div class="row">
 
+    <?php 
+    
+    if(isset($_GET['catergory'])){
+        $post_catergory = $_GET['catergory'];
+
+        $query = "SELECT * FROM catergories WHERE cat_id = {$post_catergory}";
+        $get_cat_query
+    }
+    
+    ?>
+
         <!-- Blog Entries Column -->
         <div class="col-md-8">
                 <h1 class="page-header">
@@ -18,9 +29,6 @@
 
         <?php
 
-        if(isset($_GET['catergory'])){
-            $post_catergory = $_GET['catergory'];
-        }
 
             $query = "SELECT * FROM posts WHERE post_catergory_id = $post_catergory AND post_status = 'published'";
             $select_all_posts_query = mysqli_query($connection, $query);
