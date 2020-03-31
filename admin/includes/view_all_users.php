@@ -1,7 +1,6 @@
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
-            <th>ID</th>
             <th>Username</th>
             <th>Firstname</th>
             <th>Lastname</th>
@@ -26,8 +25,6 @@ while ($row = mysqli_fetch_assoc($select_all_users_admin)){
     $user_image = $row['user_image'];
 
     echo "<tr>";
-
-    echo "<td>$user_id</td>";
     echo "<td>$username</td>";
     echo "<td>$user_firstname</td>";
     echo "<td>$user_lastname</td>";

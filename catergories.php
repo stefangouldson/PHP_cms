@@ -57,7 +57,7 @@
                     $username = $row['username'];
                 ?>
                 <p class="lead">
-                    by <a href="index.php"><?php echo $username ?></a>
+                    by <a href="author_posts.php?author=<?php echo $post_user_id ?>"><?php echo $username ?></a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span><?php echo " Posted on {$post_date}" ?></p>
                 <hr>

@@ -26,12 +26,13 @@
                 echo "<li class='active'><a href='./'>Home</a></li>";
              } else { echo "<li><a href='./'>Home</a></li>";}
 
+            if(isset($_SESSION['username'])){
              echo "<li><a href='admin'>Admin</a></li>";
-             
+            } else {
              if($pageName == 'registration.php'){
                 echo "<li class = 'active'><a href='registration.php'>Register</a></li>";
              } else { echo "<li><a href='registration.php'>Register</a></li>";}
-
+            }
              if($pageName == 'contact.php'){
                 echo "<li class = 'active'><a href='contact.php'>Contact Us</a></li>";
              } else { echo "<li><a href='contact.php'>Contact Us</a></li>";}

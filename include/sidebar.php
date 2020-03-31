@@ -17,11 +17,25 @@
     </div>
 
     <?php 
-    
-    $user_role = $_SESSION['user_role'];
-    $username = $_SESSION['username'];
-    if(!$user_role){ 
+    if(isset($_SESSION['user_role'])){
+        $user_role = $_SESSION['user_role'];
+        $username = $_SESSION['username'];
         ?>
+
+    <div class="well">
+        <h4>Signed in as <?php echo $username ?></h4>
+        <form action="include/logout.php" method="POST">
+            <div class="form-group">
+                <input name="logout" type="submit" value="Logout" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+
+
+     <?php }  
+     
+     else { ?>
+
     <div class="well">
         <h4>Login</h4>
         <form action="include/login.php" method="POST">
@@ -39,19 +53,6 @@
         </form>
         <!-- /.input-group -->
     </div>
-
-     <?php } else { ?>
-
-    <div class="well">
-        <h4>Signed in as <?php echo $username ?></h4>
-        <form action="include/logout.php" method="POST">
-            <div class="form-group">
-                <input name="logout" type="submit" value="Logout" class="btn btn-primary">
-            </div>
-        </form>
-    </div>
-
-
      <?php } ?>
 
 

@@ -1,7 +1,50 @@
+<?php 
+
+if(isset($_POST['checkBoxArray'])){
+
+    foreach($_POST['checkBoxArray'] as $checkBoxValue){
+      $bulk_options = $_POST['bulkOptions'];
+
+      switch($bulk_options){
+
+        case 'APPROVED':
+        $query = "UPDATE comments SET comment_status = '{$bulk_options}' WHERE comment_id = {$checkBoxValue}";
+        $update_to_published = mysqli_query($connection, $query);
+        confirmQuery($update_to_published);
+        break;
+
+        case 'UNAPPROVED':
+        $query = "UPDATE comments SET comment_status = '{$bulk_options}' WHERE comment_id = {$checkBoxValue}";
+        $update_to_draft = mysqli_query($connection, $query);
+        confirmQuery($update_to_draft);
+        break;
+
+      }
+    }
+}
+
+?>
+
+<form action="" method="POST">
+
+    <div id="bulkOptionsContainer" class="col-xs-4">
+        <select class="form-control" name="bulkOptions" id="">
+            <option disabled selected hidden value="">Select Option</option>
+            <option value="APPROVED">Approve</option>
+            <option value="UNAPPROVED">Unapprove</option>
+        </select>
+    </div>
+
+<style>#bulkOptionsContainer{padding: 0px; margin-bottom: 1%}</style>
+
+<div class="col-xs-4">
+    <input type="submit" name="submit" class="btn btn-success" value="Apply">
+</div>
+
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
-            <th>ID</th>
+            <th><input id='selectAllBoxes' type="checkbox"></th>
             <th>Author</th>
             <th>Comment</th>
             <th>Email</th>
@@ -27,7 +70,10 @@ while ($row = mysqli_fetch_assoc($select_all_comments_admin)){
     $comment_date = $row['comment_date'];
 
     echo "<tr>";
-    echo "<td>$comment_id</td>";
+    ?>
+    <td><input class = 'checkBoxes' type='checkbox' name = 'checkBoxArray[]' value='<?php echo $comment_id ?>'></td>
+    <?php
+    // echo "<td>$comment_id</td>";
     echo "<td>$comment_author</td>";
     echo "<td>$comment_content</td>";
     echo "<td>$comment_email</td>";
@@ -57,6 +103,7 @@ while ($row = mysqli_fetch_assoc($select_all_comments_admin)){
 
     </tbody>
 </table>
+</form>
 
 <?php 
 
