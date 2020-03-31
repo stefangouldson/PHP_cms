@@ -8,7 +8,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/cms">Home</a>
+            <?php 
+            $pageName = basename($_SERVER['PHP_SELF']);
+            
+            
+            ?>
         </div>
 
 
@@ -16,8 +20,24 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
 
-                <li><a href="admin">Admin</a></li>
-                <li><a href="registration.php">Register</a></li>
+            <?php 
+             $pageName = basename($_SERVER['PHP_SELF']);
+
+             if($pageName == 'index.php'){
+                echo "<li class='active'><a href='./'>Home</a></li>";
+             } else { echo "<li><a href='./'>Home</a></li>";}
+
+             echo "<li><a href='admin'>Admin</a></li>";
+             
+             if($pageName == 'registration.php'){
+                echo "<li class = 'active'><a href='registration.php'>Register</a></li>";
+             } else { echo "<li><a href='registration.php'>Register</a></li>";}
+
+             if($pageName == 'contact.php'){
+                echo "<li class = 'active'><a href='contact.php'>Contact Us</a></li>";
+             } else { echo "<li><a href='contact.php'>Contact Us</a></li>";}
+            
+            ?>
 
                 <?php 
                 

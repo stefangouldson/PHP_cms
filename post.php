@@ -16,14 +16,14 @@
 
             if (isset($_GET['p_id'])) {
                 $post_id = $_GET['p_id'];
-
+                
                 $view_query = "UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id = {$post_id}";
                 $update_views = mysqli_query($connection, $view_query);
                 if (!$update_views) {
                     die("VIEWS QUERY FAILED" . mysqli_error($connection));
                 }
 
-                $query = "SELECT * FROM posts where post_id = {$post_id}";
+                $query = "SELECT * FROM posts where post_id = {$post_id} AND post_status = 'published'";
                 $select_all_posts_query = mysqli_query($connection, $query);
 
                 while ($row = mysqli_fetch_assoc($select_all_posts_query)) {
@@ -106,6 +106,17 @@
             ?>
 
             <!-- Comments Form -->
+
+            <?php 
+            
+            $query = "SELECT * FROM posts where post_id = {$post_id} AND post_status = 'published'";
+            $select_all_posts_query = mysqli_query($connection, $query);
+            $check_post = mysqli_num_rows($select_all_posts_query);
+
+            if($check_post>0){
+            
+            
+            ?>
             <div class="well">
 
                 <h4>Leave a Comment:</h4>
@@ -184,6 +195,9 @@
 
 
             <?php } ?>
+            <?php } else {
+                echo "<h1>This post is still a draft</h1>";
+            } ?>
 
             <!-- Pager -->
 
