@@ -2,20 +2,67 @@
 <?php include "include/header.php"; ?>
 <!-- Navigation -->
 <?php include "include/navbar.php"; ?>
+<?php 
 
+function username_exist ($username){
+    global $connection;
+
+    $query = "SELECT * FROM users WHERE username = '$username'";
+    $check_user = mysqli_query($connection, $query);
+    $result = mysqli_num_rows($check_user);
+
+    if($result > 0){ return true;}
+    else {return false;}
+}
+
+function email_exist ($email){
+    global $connection;
+
+    $query = "SELECT * FROM users WHERE user_email = '$email'";
+    $check_email = mysqli_query($connection, $query);
+    $result = mysqli_num_rows($check_email);
+
+    if($result > 0){ return true;}
+    else {return false;}
+}
+
+
+?>
 <?php 
 
 if(isset($_POST['submit'])){
 
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
+
+    $error = [
+        'username' => '',
+        'email' => '',
+        'password' => ''
+    ];
+
+    if(strlen($password < 4)){
+        $error['password'] = 'password too short';
+    }
+
+    if(!empty($error)){
+        echo "<div class = 'container'><div class='row'><div class='col-xs-6 col-xs-offset-3'>";
+        foreach($error as $key){
+            echo "<h4>{$key}</h4>";
+        }
+        echo "</div></div></div>";
+
+    } else {
 
     if(!empty($username) && !empty($email) && !empty($password)){
 
     $username = mysqli_real_escape_string($connection,$username);
     $email = mysqli_real_escape_string($connection,$email);
     $password = mysqli_real_escape_string($connection,$password);
+
+    if (!username_exist($username) && !email_exist($email)){
+
 
     $password = password_hash($password,PASSWORD_BCRYPT,['cost'=>12]);
 
@@ -26,12 +73,12 @@ if(isset($_POST['submit'])){
     }
 
     header('Location:./');
-
+    }
     } else {
         echo "<script>alert('Fields cannot be empty')</script>";
     }
 }
-
+}
 
 ?>
 
@@ -50,15 +97,15 @@ if(isset($_POST['submit'])){
                         <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
                             <div class="form-group">
                                 <label for="username" class="sr-only">username</label>
-                                <input type="text" name="username" id="username" class="form-control" placeholder="Enter Desired Username">
+                                <input type="text" name="username" id="username" class="form-control" placeholder="Enter Desired Username" required>
                             </div>
                             <div class="form-group">
                                 <label for="email" class="sr-only">Email</label>
-                                <input type="email" name="email" id="email" class="form-control" placeholder="somebody@example.com">
+                                <input type="email" name="email" id="email" class="form-control" placeholder="somebody@example.com" required>
                             </div>
                             <div class="form-group">
                                 <label for="password" class="sr-only">Password</label>
-                                <input type="password" name="password" id="key" class="form-control" placeholder="Password">
+                                <input type="password" name="password" id="key" class="form-control" placeholder="Password" required>
                             </div>
 
                             <input type="submit" name="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Register">

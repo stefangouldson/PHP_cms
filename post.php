@@ -112,10 +112,11 @@
             $query = "SELECT * FROM posts where post_id = {$post_id} AND post_status = 'published'";
             $select_all_posts_query = mysqli_query($connection, $query);
             $check_post = mysqli_num_rows($select_all_posts_query);
-
+            
+            
             if($check_post>0){
-            
-            
+                
+                if (isset($_SESSION['username'])){
             ?>
             <div class="well">
 
@@ -159,7 +160,9 @@
                 </form>
 
             </div>
-
+                    <?php } else {
+                        echo "<h3>Sign In to leave a comment</h3>";
+                    } ?>
             <hr>
 
             <!-- Posted comments -->
@@ -181,9 +184,6 @@
 
                 <!-- Comment -->
                 <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a>
                     <div class="media-body">
                         <h4 class="media-heading"><?php echo $comment_author; ?>
                             <small><?php echo $comment_date; ?></small>
@@ -191,7 +191,7 @@
                         <?php echo $comment_content; ?>
                     </div>
                 </div>
-
+                <hr>
 
 
             <?php } ?>
