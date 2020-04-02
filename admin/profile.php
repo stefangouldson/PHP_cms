@@ -87,8 +87,8 @@ if (isset($_POST['edit_user'])) {
                         </div>
 
                         <div class="form-group">
-                            <label for="title">Password</label>
-                            <input type="password" class="form-control" name="password" placeholder="Enter Password">
+                            <label for="title">Password - Required:Re-enter or create new</label>
+                            <input type="password" class="form-control" name="password" placeholder="Enter Password" required>
                         </div>
 
                         <div class="form-group">
