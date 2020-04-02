@@ -110,21 +110,26 @@ while ($row = mysqli_fetch_assoc($select_all_comments_admin)){
 if(isset($_GET['approve'])){
     global $connection;
 
+    if(isset($_SESSION['user_role'])){
+        if($_SESSION['user_role'] == 'admin'){
+
     $comment_id_approve = $_GET['approve'];
     $query = "UPDATE comments SET comment_status = 'APPROVED' WHERE comment_id = {$comment_id_approve}";
     $approveQuery = mysqli_query($connection, $query);
     header("location:comments.php");
-
+        }}
 }
 
 if(isset($_GET['unapprove'])){
     global $connection;
 
+    if(isset($_SESSION['user_role'])){
+        if($_SESSION['user_role'] == 'admin'){
     $comment_id_unapprove = $_GET['unapprove'];
     $query = "UPDATE comments SET comment_status = 'UNAPPROVED' WHERE comment_id = {$comment_id_unapprove}";
     $unapproveQuery = mysqli_query($connection, $query);
     header("location:comments.php");
-
+        }}
 }
 
 if(isset($_GET['delete'])){
@@ -137,8 +142,8 @@ if(isset($_GET['delete'])){
         $query = "DELETE FROM comments WHERE comment_id = {$comment_id_del}";
         $deleteQuery = mysqli_query($connection, $query);
         header("location:comments.php");
-        }
-    }
+        } else {die('You are not admin');}
+    } else {die('Nice try');}
 }
 
 

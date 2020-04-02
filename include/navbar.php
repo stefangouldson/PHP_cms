@@ -27,7 +27,7 @@
              } else { echo "<li><a href='./'>Home</a></li>";}
 
             if(isset($_SESSION['username'])){
-             echo "<li><a href='admin'>Admin</a></li>";
+                if($_SESSION['user_role'] == 'admin'){echo "<li><a href='admin'>Admin</a></li>";}
             } else {
              if($pageName == 'registration.php'){
                 echo "<li class = 'active'><a href='registration.php'>Register</a></li>";

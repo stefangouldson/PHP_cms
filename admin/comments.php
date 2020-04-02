@@ -15,7 +15,6 @@
 
                     <h1 class="page-header">
                         Comments
-                        <small>Admin</small>
                     </h1>
 
                     <?php 

@@ -108,12 +108,16 @@ function deleteCatergory (){
     global $connection;
 
     if (isset($_GET['delete'])) {
-
-        $cat_id = $_GET['delete'];
-        $query = "DELETE FROM catergories WHERE cat_id={$cat_id}";
-        $delete_query = mysqli_query($connection, $query);
-        header("location:catergories.php");
+        if(isset($_SESSION['user_role'])){
+            if($_SESSION['user_role'] == 'admin'){
+            $cat_id = $_GET['delete'];
+            $query = "DELETE FROM catergories WHERE cat_id={$cat_id}";
+            $delete_query = mysqli_query($connection, $query);
+            confirmQuery($delete_query);
+            header("location:catergories.php");
+        }
     }
+}
 
 }
 

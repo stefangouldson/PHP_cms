@@ -19,7 +19,6 @@
 
                     <h1 class="page-header">
                         Users
-                        <small>Admin</small>
                     </h1>
 
                     <?php 

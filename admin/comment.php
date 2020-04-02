@@ -12,10 +12,19 @@
             <!-- Page Heading -->
             <div class="row">
                 <div class="col-lg-12">
+                    <?php 
+                    if(isset($_GET['id'])){
+                        $post_id = $_GET['id'];
+                        $query = "SELECT * FROM posts WHERE post_id = {$post_id}";
+                        $get_post = mysqli_query($connection, $query);
 
+                        $row = mysqli_fetch_array($get_post);
+                        $post_title = $row['post_title'];
+                    } 
+                    ?>
                     <h1 class="page-header">
                         Comments for :
-                        <small><?php echo "Some post" ?></small>
+                        <small><?php echo $post_title ?></small>
                     </h1>
 
                     <?php 

@@ -15,7 +15,6 @@
 
                     <h1 class="page-header">
                         Posts
-                        <small>Admin</small>
                     </h1>
 
                     <?php 
