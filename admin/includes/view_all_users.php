@@ -38,7 +38,7 @@ while ($row = mysqli_fetch_assoc($select_all_users_admin)){
     }
 
     echo "<td><a class='btn btn-success' href='users.php?source=edit_user&u_id={$user_id}'>Edit</a></td>";
-    echo "<td><a class='btn btn-danger' href='users.php?delete={$user_id}'>Delete</a></td>";
+    echo "<td><a class='btn btn-danger' href='users.php?delete={$user_id}' onClick=\"javascript: return confirm('Are you sure you want to delete this user?') \">Delete</a></td>";
     echo "</tr>";
 ;}
 

@@ -8,6 +8,10 @@
 
 if(isset($_POST['submit'])){
 
+    if(!empty($_POST['botcatcher'])){
+        die('gotcha bot!');
+    } 
+
     $to = "stefangouldson@gmail.com";
     $subject = $_POST['subject'];
     $msg = $_POST['body'];
@@ -17,10 +21,7 @@ if(isset($_POST['submit'])){
     $header = "From: " . $_POST['email'];
     mail($to, $subject, $msg, $header);
 }
-
 ?>
-
-
 
 
 <!-- Page Content -->
@@ -29,7 +30,7 @@ if(isset($_POST['submit'])){
     <section id="login">
         <div class="container">
             <div class="row">
-                <div class="col-xs-6 col-xs-offset-3">
+                <div class="col-xs-12">
                     <div class="form-wrap">
                         <h1>Contact Us</h1>
                         <form role="form" action="" method="post" id="login-form" autocomplete="off">
@@ -46,6 +47,8 @@ if(isset($_POST['submit'])){
                             <div class="form-group">
                                 <textarea class="form-control" name="body" id="body" cols="30" rows="10"></textarea>
                             </div>
+
+                            <input type="text" name="botcatcher" style="display:none" value="">
 
                             <input type="submit" name="submit" id="btn-login" class="btn btn-primary" value="Submit">
                         </form>

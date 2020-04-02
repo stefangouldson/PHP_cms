@@ -93,7 +93,7 @@ while ($row = mysqli_fetch_assoc($select_all_comments_admin)){
     } else {
     echo "<td><a class='btn btn-warning' href='comments.php?unapprove={$comment_id}'>Unapprove</a></td>";
     }
-    echo "<td><a class='btn btn-danger' href='comments.php?delete={$comment_id}'>Delete</a></td>";
+    echo "<td><a class='btn btn-danger' href='comments.php?delete={$comment_id}' onClick=\"javascript: return confirm('Are you sure you want to delete this comment?') \">Delete</a></td>";
 
     echo "</tr>";
 ;}

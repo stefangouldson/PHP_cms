@@ -32,28 +32,13 @@ function email_exist ($email){
 
 if(isset($_POST['submit'])){
 
+    if(!empty($_POST['botcatcher'])){
+        die('gotcha bot!');
+    } else {
+
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
-
-    $error = [
-        'username' => '',
-        'email' => '',
-        'password' => ''
-    ];
-
-    if(strlen($password < 4)){
-        $error['password'] = 'password too short';
-    }
-
-    if(!empty($error)){
-        echo "<div class = 'container'><div class='row'><div class='col-xs-6 col-xs-offset-3'>";
-        foreach($error as $key){
-            echo "<h4>{$key}</h4>";
-        }
-        echo "</div></div></div>";
-
-    } else {
 
     if(!empty($username) && !empty($email) && !empty($password)){
 
@@ -91,7 +76,7 @@ if(isset($_POST['submit'])){
     <section id="login">
         <div class="container">
             <div class="row">
-                <div class="col-xs-6 col-xs-offset-3">
+                <div class="col-xs-8 col-xs-offset-2">
                     <div class="form-wrap">
                         <h1>Register</h1>
                         <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
@@ -107,6 +92,8 @@ if(isset($_POST['submit'])){
                                 <label for="password" class="sr-only">Password</label>
                                 <input type="password" name="password" id="key" class="form-control" placeholder="Password" required>
                             </div>
+
+                            <input type="text" name="botcatcher" style="display:none" value="">
 
                             <input type="submit" name="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Register">
                         </form>
